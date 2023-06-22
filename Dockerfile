@@ -12,7 +12,7 @@ ENV PATH=$PATH:/miniconda/condabin:/miniconda/bin
 # run Jupyter install
 RUN conda install jupyter
 
-# create conda environment
+# create a conda environment
 COPY environment.yml .
 RUN conda env create -f environment.yml
 
@@ -37,10 +37,10 @@ SHELL ["/bin/bash","-c"]
 RUN conda init
 RUN echo 'conda activate automl_py37' >> ~/.bashrc
 
-COPY BioAutoMATED/ ./BioAutoMATED/
+COPY . ./BioAutoMATED/
 
 EXPOSE 8888                                           
-ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''","--NotebookApp.password=''"]
+ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", "-no-browser", "--allow-root", "--NotebookApp.token=''","--NotebookApp.password=''"]
 
 
 
